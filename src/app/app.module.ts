@@ -9,6 +9,8 @@ import { LoginComponent } from './components/main/login/login.component';
 import { RegisterComponent } from './components/main/register/register.component';
 import { ButtonModule } from 'primeng/button';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { ButtonModule } from 'primeng/button';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
