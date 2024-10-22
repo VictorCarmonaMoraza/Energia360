@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      usuario: ['', Validators.required],
-      password: ['', Validators.required]
+      nameUserForm: ['', Validators.required],
+      passwordForm: ['', Validators.required]
     })
   }
 
   loggin():void{
     console.log(this.loginForm);
+
+    //Construimos Usuario
+    const user: User={
+      nameUser:this.loginForm.value.nameUserForm,
+      password:this.loginForm.value.passwordForm
+    }
+    console.log(user)
   }
 }
