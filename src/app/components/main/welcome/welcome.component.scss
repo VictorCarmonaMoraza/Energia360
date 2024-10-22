@@ -6,3 +6,23 @@
   min-height: 100vh;
   text-align: center;
 }
+ hr
+{
+  border-width: 3px;
+  max-width: 65px;
+  border-color: chartreuse;
+}
+
+.btnWelcome
+{
+background-color: burlywood;
+border-color: black;
+margin: 10px;
+padding: 1 rem 2 rem;
+border-radius: 100px;
+}
+
+.btnWelcome:hover{
+  background-color: aqua;
+  border-width: 4px;
+}
