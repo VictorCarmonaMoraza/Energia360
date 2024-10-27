@@ -1,28 +1,27 @@
-.container
-{
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  text-align: center;
 }
- hr
-{
+
+hr {
   border-width: 3px;
   max-width: 65px;
-  border-color: chartreuse;
+  border-color: #F05F44;
+  justify-content: center;
 }
 
-.btnWelcome
-{
-background-color: burlywood;
-border-color: black;
-margin: 10px;
-padding: 1 rem 2 rem;
-border-radius: 100px;
+.btn-xl {
+  background-color: #F05F44;
+  border-color:  #F05F44;
+  margin: 10px;
+  padding: 1rem 2rem;
+  border-radius: 100px;
 }
 
-.btnWelcome:hover{
-  background-color: aqua;
+.btn-xl:hover {
+  background-color: #EE4B08;
+  border-radius: #EE4B08;
   border-width: 4px;
 }

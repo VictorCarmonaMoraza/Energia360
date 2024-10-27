@@ -1,1 +1,31 @@
-<p>register works!</p>
+<div class="container">
+  <div class="row" style="width: 100%;">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card text-center" style="padding: 30px;">
+        <h3>Login</h3>
+        <br>
+        <form [formGroup]="RegisterForm" (ngSubmit)="Register()">
+          <div class="form-group" style="text-align: start;">
+            <input type="text" class="form-control" placeholder="usuario" formControlName="nameUserForm">
+            <span class="text-danger p-1" *ngIf="RegisterForm.get('nameUserForm')?.hasError('required') && RegisterForm.get('nameUserForm')?.touched">El usuario es requerido</span>
+          </div>
+          <div class="form-group mt-2" style="text-align: start;">
+            <input type="password" class="form-control" placeholder="contraseña" formControlName="passwordForm">
+            <span class="text-danger p-1" *ngIf="RegisterForm.get('passwordForm')?.hasError('required') && RegisterForm.get('passwordForm')?.touched">La contraseña es requerida</span>
+            <span class="text-danger p-1" *ngIf="RegisterForm.get('passwordForm')?.hasError('minlength') && RegisterForm.get('passwordForm')?.touched">La contraseña debe tener un minimo de 4 caracteres</span>
+          </div>
+          <div class="form-group mt-2" style="text-align: start;">
+            <input type="password" class="form-control" placeholder="Repetir password" formControlName="passwordFormRepeat">
+            <span class="text-danger p-1" *ngIf="RegisterForm.hasError('notSame')">Contraseñas distintas</span>
+
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary m-2" [disabled]="RegisterForm.invalid">Aceptar</button>
+            <button class="btn btn-secondary" routerLink="/welcome/login">Volver</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
