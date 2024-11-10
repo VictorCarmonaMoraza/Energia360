@@ -5,15 +5,15 @@
   min-height: 100vh;
 }
 
-hr {
-  border-width: 3px;
-  max-width: 65px;
-  border-color: #F05F44;
-  justify-content: center;
-}
+// hr {
+//   border-width: 3px;
+//   max-width: 65px;
+//   border-color: #F05F44;
+//   justify-content: center;
+// }
 
 .btn-xl {
-  background-color: #F05F44;
+  background-color: #00796B;
   border-color:  #F05F44;
   margin: 10px;
   padding: 1rem 2rem;
@@ -24,4 +24,14 @@ hr {
   background-color: #EE4B08;
   border-radius: #EE4B08;
   border-width: 4px;
+}
+
+.centered-hr {
+  // width: 50%;      /* Ajusta el ancho como prefieras */
+  margin: 20px auto; /* Centra horizontalmente y ajusta el margen */
+  //border: 1px solid #000; /* Define un grosor y color */
+  border-width: 3px;
+  max-width: 65px;
+  border-color: #00796B;
+  justify-content: center;
 }

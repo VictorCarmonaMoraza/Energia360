@@ -1,1 +1,153 @@
-<p>create-plants works!</p>
+<!-- <div class="col-6  border">-->
+<div class="row">
+  <div class="col p-5">
+    <!-- <div class="container"> -->
+    <h2>Creacion de planta</h2>
+    <form [formGroup]="plantaFormNew">
+      <!--Fila 1-->
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label>Nombre:</label>
+            <input formControlName="name" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Ubicación:</label>
+            <input formControlName="country" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Capacidad:</label>
+            <input formControlName="capacityFactor" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!--Fila 2-->
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label>Tipo:</label>
+            <input formControlName="energyType" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Estado:</label>
+            <input formControlName="status" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Ciudad o Región</label>
+            <input formControlName="cityOrRegion" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!--Fila 3-->
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label>Latitud</label>
+            <input formControlName="latitude" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Longitud</label>
+            <input formControlName="longitude" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Capacidad Instalada</label>
+            <input formControlName="installedCapacity" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!--Fila 4-->
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label>Fecha de Inicio</label>
+            <input formControlName="startDate" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Propietario</label>
+            <input formControlName="owner" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Estado</label>
+            <input formControlName="status" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!--fila 5-->
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label>Producción Anual Estimada</label>
+            <input formControlName="estimatedAnnualProduction" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Emisiones Evitadas</label>
+            <input formControlName="emissionsAvoided" class="form-control" />
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label>Costo de Construcción</label>
+            <input formControlName="constructionCost" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!--Fila 6-->
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label>Número de Unidades</label>
+            <input formControlName="numberOfUnits" class="form-control" />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label>Factor de Capacidad</label>
+            <input formControlName="capacityFactor" class="form-control" />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label>Proveedor de Tecnología</label>
+            <input formControlName="technologyProvider" class="form-control" />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label>Calificación</label>
+            <input formControlName="rating" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </form>
+  </div>
+</div>
+<!-- </div>
+</div> -->

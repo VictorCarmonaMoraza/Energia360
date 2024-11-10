@@ -1,1 +1,15 @@
-<p>upp-files-plants works!</p>
+<div class="containerCard">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <input type="file" (change)="onFileChange($event)" accept=".xlsx, .xls, .csv" />
+      <div *ngIf="data.length">
+        <h3>Datos importados:</h3>
+        <table>
+          <tr *ngFor="let row of data">
+            <td *ngFor="let cell of row">{{ cell }}</td>
+          </tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

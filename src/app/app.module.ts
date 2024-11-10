@@ -20,6 +20,8 @@ import { UppFilesPlantsComponent } from './components/dashboard/upp-files-plants
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { TableModule } from 'primeng/table';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatGridListModule
+    MatGridListModule,
+    TableModule,
+    MatCardModule
   ],
   providers: [
     provideAnimationsAsync()
