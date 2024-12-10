@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sección de Listado de Plantas -->
-    <div class="col-md-6 border full-height overflow-auto">
+    <div class="col-md-6 border full-height overflow-auto" style="background-color: aqua;">
       <h2 class="text-center">Listado de plantas</h2>
       <div *ngIf="plants.length > 0; else noPlants">
         <table class="table table-bordered">
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="row mt-3">
+  <div class="row">
     <!-- Sección de Información de la Planta -->
     <div class="col-md-6 border full-height overflow-auto">
       <h2>Información de la Planta Renovable</h2>

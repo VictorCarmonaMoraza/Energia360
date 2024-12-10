@@ -17,7 +17,7 @@ export class PlantService {
   }
 
   getHistoricPlant(idPlant: number): Observable<HistoricPlant[]> {
-    return this.http.get<HistoricPlant[]>(`http://localhost:5018/api/history/historyPlant/${idPlant}`);
+    return this.http.get<HistoricPlant[]>(`http://localhost:5018/api/plant/historyPlant/${idPlant}`);
   }
 
 

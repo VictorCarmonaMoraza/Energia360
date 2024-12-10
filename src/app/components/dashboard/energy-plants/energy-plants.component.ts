@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlantService } from '../../../services/plant.service';
 import { HistoricPlant, Plant } from '../../../models/plant';
-import L, { Map, Marker, marker, tileLayer } from 'leaflet';
+import L, { Icon, Map, Marker, marker, tileLayer } from 'leaflet';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import * as am5radar from "@amcharts/amcharts5/radar";
@@ -29,7 +29,7 @@ export class EnergyPlantsComponent implements OnInit {
   private map!: Map;
   private plantMarkers: Marker[] = []
 
-  dataGrafica
+  dataGrafica: any;
 
   constructor(
     private fb: FormBuilder,
@@ -66,7 +66,7 @@ export class EnergyPlantsComponent implements OnInit {
     //   { field: 'rating', header: 'Rating' }
     // ];
 
-    this.loadDefaultChart();
+    //this.loadDefaultChart();
   }
 
   ngAfterViewInit(): void {
@@ -115,11 +115,120 @@ export class EnergyPlantsComponent implements OnInit {
     this.plantMarkers.forEach(marker => this.map.removeLayer(marker));
     this.plantMarkers = [];
 
+    // Crear un icono personalizado
+    const solar = new Icon({
+      iconUrl: 'assets/solar.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+    const eolica = new Icon({
+      iconUrl: 'assets/eolica.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+    const geo = new Icon({
+      iconUrl: 'assets/Geotermica.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+    const hidro = new Icon({
+      iconUrl: 'assets/Hidroelectrica.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+    const mar = new Icon({
+      iconUrl: 'assets/Mareomotriz.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+    const oceano = new Icon({
+      iconUrl: 'assets/Oceanica.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+    const bio = new Icon({
+      iconUrl: 'assets/Biomasa.png', // Ruta a tu icono personalizado
+      iconSize: [32, 32], // Ajusta el tamaño del icono
+      iconAnchor: [16, 32], // Punto del icono que está anclado al marcador
+      popupAnchor: [0, -32] // Punto de la ventana emergente en relación con el icono
+    });
+
     // Agregar un marcador para cada planta y ajustarlo en el mapa
     plants.forEach(plant => {
-      const plantMarker = marker([plant.latitude, plant.longitude])
+      // Seleccionar el icono en función del valor de `energyType`
+      let selectedIcon;
+      if (plant.energyTypeId === 1) {
+        selectedIcon = solar;
+      } else if (plant.energyTypeId === 2) {
+        selectedIcon = eolica;
+      } else if (plant.energyTypeId === 3) {
+        selectedIcon = hidro;
+      } else if (plant.energyTypeId === 4) {
+        selectedIcon = geo;
+      }
+      else if (plant.energyTypeId === 5) {
+        selectedIcon = bio;
+      }
+      else if (plant.energyTypeId === 6) {
+        selectedIcon = mar;
+      } else {
+        selectedIcon = oceano;
+      }
+
+      // Contenido completo del popup para mostrar en el tooltip
+      const popupContent = `
+      <div class="map-popup">
+        <div class="row mb-3 fw-bold text-center">
+          <div class="col">
+            ${plant.name} <!-- Título -->
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col">
+            <img src="${selectedIcon.options.iconUrl}" alt="Descripción de la imagen" style="width:30%; height:auto;"/> <!-- Imagen -->
+          </div>
+        </div>
+        <div class="row text-center mt-3">
+          <div class="col cap-max-value">
+            Volum màxim: m<sup>3</sup>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col cap-max-value">
+            Volum mínim:
+          </div>
+        </div>
+        <div class="row text-center mt-3">
+          <div class="col cap-actual-value">
+            Volum actual:
+          </div>
+        </div>
+      </div>
+    `;
+
+
+
+      // Agregar un marcador para cada planta y ajustarlo en el mapa
+      const plantMarker = marker([plant.latitude, plant.longitude], { icon: selectedIcon })
         .addTo(this.map)
-        .bindPopup(plant.name);
+        .bindPopup(popupContent);
+
+      // Abrir el popup al pasar el mouse por encima
+      plantMarker.on('mouseover', () => {
+        plantMarker.openPopup();
+      });
+
+      // Cerrar el popup al retirar el mouse del marcador
+      plantMarker.on('mouseout', () => {
+        plantMarker.closePopup();
+      });
+
       this.plantMarkers.push(plantMarker);
     });
 
@@ -128,6 +237,8 @@ export class EnergyPlantsComponent implements OnInit {
     if (bounds.isValid()) {
       this.map.fitBounds(bounds);
     }
+
+
 
   }
 
@@ -366,7 +477,7 @@ export class EnergyPlantsComponent implements OnInit {
 
   }
 
-  CrearGrafica2(dataResponse: any) {
+  CrearGrafica3(dataResponse: any) {
     /* Chart code */
     // Create root element
     // https://www.amcharts.com/docs/v5/getting-started/#Root_element
@@ -489,7 +600,16 @@ export class EnergyPlantsComponent implements OnInit {
     //   country: "Canada",
     //   value: 441
     // }];
+    // let data = dataResponse;
+    // Transforma los datos
+    // const response = dataResponse.map(item => ({
+    //   recordDate: item.date, // Transforma la clave 'date' a 'recordDate'
+    //   value: item.amount     // Transforma la clave 'amount' a 'value'
+    // }));
     let data = dataResponse;
+
+    xAxis.data.clear(); // Borra los datos previos del eje X
+    series.data.clear(); // Borra los datos previos de la serie
     xAxis.data.setAll(data);
     series.data.setAll(data);
 
@@ -500,7 +620,107 @@ export class EnergyPlantsComponent implements OnInit {
     chart.appear(1000, 100);
   }
 
-  loadDefaultChart() {
+  CrearGrafica2(dataResponse: any) {
+    const chartContainerId = "chartGraficaBarras";
+
+    // Check if a root instance already exists for this DOM element
+    if (am5.registry.rootElements.some(root => root.dom.id === chartContainerId)) {
+      const existingRoot = am5.registry.rootElements.find(root => root.dom.id === chartContainerId);
+      if (existingRoot) {
+        existingRoot.dispose(); // Dispose of the existing root
+      }
+    }
+
+    // Create a new root element
+    let root = am5.Root.new(chartContainerId);
+
+    // Set themes
+    root.setThemes([
+      am5themes_Animated.new(root)
+    ]);
+
+    // Rest of the chart creation logic remains the same
+    let chart = root.container.children.push(am5xy.XYChart.new(root, {
+      panX: true,
+      panY: true,
+      wheelX: "panX",
+      wheelY: "zoomX",
+      pinchZoomX: true,
+      paddingLeft: 0,
+      paddingRight: 1
+    }));
+
+    let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    cursor.lineY.set("visible", false);
+
+    // Create axes
+    let xRenderer = am5xy.AxisRendererX.new(root, {
+      minGridDistance: 30,
+      minorGridEnabled: true
+    });
+
+    xRenderer.labels.template.setAll({
+      rotation: -90,
+      centerY: am5.p50,
+      centerX: am5.p100,
+      paddingRight: 15
+    });
+
+    xRenderer.grid.template.setAll({
+      location: 1
+    });
+
+    let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+      maxDeviation: 0.3,
+      categoryField: "recordDate",
+      renderer: xRenderer,
+      tooltip: am5.Tooltip.new(root, {})
+    }));
+
+    let yRenderer = am5xy.AxisRendererY.new(root, {
+      strokeOpacity: 0.1
+    });
+
+    let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+      maxDeviation: 0.3,
+      renderer: yRenderer
+    }));
+
+    // Create series
+    let series = chart.series.push(am5xy.ColumnSeries.new(root, {
+      name: "Series 1",
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "value",
+      sequencedInterpolation: true,
+      categoryXField: "recordDate",
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{valueY}"
+      })
+    }));
+
+    series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
+    series.columns.template.adapters.add("fill", function (fill, target) {
+      return chart.get("colors").getIndex(series.columns.indexOf(target));
+    });
+
+    series.columns.template.adapters.add("stroke", function (stroke, target) {
+      return chart.get("colors").getIndex(series.columns.indexOf(target));
+    });
+
+    // Clear previous data and set new data
+    xAxis.data.clear();
+    series.data.clear();
+    xAxis.data.setAll(dataResponse);
+    series.data.setAll(dataResponse);
+
+    // Animations
+    series.appear(1000);
+    chart.appear(1000, 100);
+  }
+
+
+  loadDefaultChart(idPlant:number) {
     // Generar datos por defecto
     const defaultData = [
       { recordDate: '01/01/2024', value: 100 },
@@ -510,6 +730,8 @@ export class EnergyPlantsComponent implements OnInit {
       { recordDate: '05/01/2024', value: 170 },
       { recordDate: '06/01/2024', value: 160 }
     ];
+
+    //Obtener los datos de la planta
 
     // Crear la gráfica con datos por defecto
     this.CrearGrafica2(defaultData);
