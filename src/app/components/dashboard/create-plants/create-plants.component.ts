@@ -10,6 +10,7 @@ import { PlantService } from '../../../services/plant.service';
 export class CreatePlantsComponent implements OnInit {
 
   plantaFormNew: FormGroup;
+  energyTypes: any[] = [];
 
   constructor(private fb: FormBuilder) { }
 
@@ -17,6 +18,7 @@ export class CreatePlantsComponent implements OnInit {
     this.initForm();
   }
 
+  //Fromulario para la nueva planta
   initForm() {
     this.plantaFormNew = this.fb.group({
       name: [''],

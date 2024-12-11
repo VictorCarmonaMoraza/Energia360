@@ -30,10 +30,14 @@
       <div class="row">
         <div class="col-4">
           <div class="form-group">
-            <label>Tipo:</label>
-            <input formControlName="energyType" class="form-control" />
+            <label>Tipo</label>
+            <select formControlName="energyType" class="form-control">
+              <option value="">Seleccione un tipo</option>
+              <option *ngFor="let type of energyTypes" [value]="type.id">{{ type.name }}</option>
+            </select>
           </div>
         </div>
+
         <div class="col-4">
           <div class="form-group">
             <label>Estado:</label>

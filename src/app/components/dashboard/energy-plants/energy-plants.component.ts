@@ -282,12 +282,12 @@ export class EnergyPlantsComponent implements OnInit {
   // }
 
   selectPlant(plant: Plant) {
-
     // Asegurarse de que el mapa esté inicializado
     if (!this.map) {
       console.error('El mapa no está inicializado.');
       return;
     }
+
     // Actualizar el formulario con los datos de la planta seleccionada
     this.plantaForm.patchValue({
       name: plant.name,
@@ -309,61 +309,45 @@ export class EnergyPlantsComponent implements OnInit {
       rating: plant.rating
     });
 
-    // Limpiar todos los marcadores del mapa
-    this.plantMarkers.forEach(marker => this.map.removeLayer(marker));
-    this.plantMarkers = [];
+    // Centrar el mapa y resaltar el marcador seleccionado
+    const selectedMarker = this.plantMarkers.find(marker =>
+      marker.getLatLng().lat === plant.latitude && marker.getLatLng().lng === plant.longitude
+    );
 
-    // Crear y agregar solo el marcador de la planta seleccionada si el mapa está definido
-    if (this.map) {
-      const selectedMarker = marker([plant.latitude, plant.longitude])
-        .addTo(this.map)
-        .bindPopup(plant.name)
-        .openPopup();
-
-      // Guardar el marcador actual para referencia futura
-      this.plantMarkers.push(selectedMarker);
-
-      // Centrar el mapa en el marcador de la planta seleccionada
-      this.map.setView([plant.latitude, plant.longitude], 7);
+    if (selectedMarker) {
+      selectedMarker.openPopup(); // Abrir el popup del marcador seleccionado
+      this.map.setView([plant.latitude, plant.longitude], 7); // Centrar el mapa en la planta seleccionada
     }
 
-    //Obtenemos datos historicos de la planta
+    // Obtener datos históricos de la planta
     this.plantService.getHistoricPlant(plant.id).subscribe({
       next: (response: HistoricPlant[]) => {
-        // Aquí se maneja la respuesta exitosa
         console.log('Response:', response);
         this.historicPlant = response;
-        let dataGrafica: any = response.map(item => {
-          // Crear una nueva fecha a partir del string de fecha
+
+        const dataGrafica = response.map(item => {
           const date = new Date(item.recordDate);
-
-          // Formatear la fecha en formato DD/MM/YYYY
           const day = String(date.getDate()).padStart(2, '0');
-          const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son indexados desde 0
+          const month = String(date.getMonth() + 1).padStart(2, '0');
           const year = date.getFullYear();
-
-          const formattedDate = `${day}/${month}/${year}`; // Formato DD/MM/YYYY
-
           return {
-            recordDate: formattedDate,   // Usa la fecha formateada
-            value: item.estimatedAnnualProduction   // Suponiendo que esta es la propiedad correcta
+            recordDate: `${day}/${month}/${year}`, // Formato DD/MM/YYYY
+            value: item.estimatedAnnualProduction
           };
         });
+
         this.CrearGrafica2(dataGrafica);
-        console.log(dataGrafica);  // Asignamos la respuesta al arreglo
+        console.log(dataGrafica);
       },
       error: (err) => {
-        // Aquí se maneja cualquier error que ocurra en la llamada
         console.error('Error occurred:', err);
       },
       complete: () => {
-        // Este bloque opcional se ejecuta cuando el observable termina (si aplica)
         console.log('Request completed');
       }
     });
-
-
   }
+
 
   //Grafica
   crearGrafica() {
