@@ -33,7 +33,7 @@
             <label>Tipo</label>
             <select formControlName="energyType" class="form-control">
               <option value="">Seleccione un tipo</option>
-              <option *ngFor="let type of energyTypes" [value]="type.id">{{ type.name }}</option>
+              <option *ngFor="let type of energyTypes" [value]="type.energyTypeId">{{ type.name }}</option>
             </select>
           </div>
         </div>

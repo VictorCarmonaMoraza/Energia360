@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlantService } from '../../../services/plant.service';
+import { EnergyType } from '../../../models/energy';
+import { EnergyService } from '../../../services/energy.service';
 
 @Component({
   selector: 'app-create-plants',
@@ -10,16 +12,34 @@ import { PlantService } from '../../../services/plant.service';
 export class CreatePlantsComponent implements OnInit {
 
   plantaFormNew: FormGroup;
-  energyTypes: any[] = [];
+  energyTypes: EnergyType[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private energyService:EnergyService
+  ) { }
 
   ngOnInit(): void {
+
     this.initForm();
+  }
+
+  loadEnergyType(){
+    //llamada al servicio para obtener todos los tipos de energia por su id
+    this.energyService.getAllEnergyTypes().subscribe({
+      next: (types) => {
+        this.energyTypes = types;
+      },
+      error: (error) => console.error('Failed to load energy types:', error)
+    });
   }
 
   //Fromulario para la nueva planta
   initForm() {
+    //Obtains the data of type of energy
+    this.loadEnergyType();
+    
+    //Load form
     this.plantaFormNew = this.fb.group({
       name: [''],
       energyType: [''],
