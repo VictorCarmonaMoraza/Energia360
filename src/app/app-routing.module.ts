@@ -24,7 +24,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, children: [
       { path: '', component: EnergyPlantsComponent },
       { path: 'create', component: CreatePlantsComponent },
-      { path: 'info', component: InforPLantsComponent },
+      { path: 'info/:id', component: InforPLantsComponent },
       { path: 'mapGeoLoc', component: MapGeoComponent },
       { path: 'create', component: CreatePlantsComponent },
       { path: 'updatePlants', component: UppFilesPlantsComponent },

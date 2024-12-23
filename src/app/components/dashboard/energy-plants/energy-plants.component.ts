@@ -7,6 +7,7 @@ import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import * as am5radar from "@amcharts/amcharts5/radar";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import { Router } from '@angular/router';
 // import * as am5index from "@amcharts/amcharts5/index";
 
 
@@ -34,7 +35,7 @@ export class EnergyPlantsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private plantService: PlantService,
-
+    private router: Router
   ) {
     this.plantaForm = this.fb.group({
       name: [{ value: '', disabled: true }],
@@ -80,7 +81,7 @@ export class EnergyPlantsComponent implements OnInit {
   initForm(plant: Plant) {
     this.plantaForm.patchValue({
       name: plant.name,
-      energyType: plant.energyTypeName,
+      energyType: plant.energyTypeId,
       country: plant.country,
       cityOrRegion: plant.cityOrRegion,
       latitude: plant.latitude,
@@ -291,7 +292,7 @@ export class EnergyPlantsComponent implements OnInit {
     // Actualizar el formulario con los datos de la planta seleccionada
     this.plantaForm.patchValue({
       name: plant.name,
-      energyType: plant.energyTypeName,
+      energyType: plant.energyTypeId,
       country: plant.country,
       cityOrRegion: plant.cityOrRegion,
       latitude: plant.latitude,
@@ -548,48 +549,6 @@ export class EnergyPlantsComponent implements OnInit {
       return chart.get("colors").getIndex(series.columns.indexOf(target));
     });
 
-
-    // // Set data
-    // let data = [{
-    //   country: "USA",
-    //   value: 2025
-    // }, {
-    //   country: "China",
-    //   value: 1882
-    // }, {
-    //   country: "Japan",
-    //   value: 1809
-    // }, {
-    //   country: "Germany",
-    //   value: 1322
-    // }, {
-    //   country: "UK",
-    //   value: 1122
-    // }, {
-    //   country: "France",
-    //   value: 1114
-    // }, {
-    //   country: "India",
-    //   value: 984
-    // }, {
-    //   country: "Spain",
-    //   value: 711
-    // }, {
-    //   country: "Netherlands",
-    //   value: 665
-    // }, {
-    //   country: "South Korea",
-    //   value: 443
-    // }, {
-    //   country: "Canada",
-    //   value: 441
-    // }];
-    // let data = dataResponse;
-    // Transforma los datos
-    // const response = dataResponse.map(item => ({
-    //   recordDate: item.date, // Transforma la clave 'date' a 'recordDate'
-    //   value: item.amount     // Transforma la clave 'amount' a 'value'
-    // }));
     let data = dataResponse;
 
     xAxis.data.clear(); // Borra los datos previos del eje X
@@ -704,7 +663,7 @@ export class EnergyPlantsComponent implements OnInit {
   }
 
 
-  loadDefaultChart(idPlant:number) {
+  loadDefaultChart(idPlant: number) {
     // Generar datos por defecto
     const defaultData = [
       { recordDate: '01/01/2024', value: 100 },
@@ -719,6 +678,13 @@ export class EnergyPlantsComponent implements OnInit {
 
     // Crear la gráfica con datos por defecto
     this.CrearGrafica2(defaultData);
+  }
+
+  InfoPlant(plantId: number) {
+    console.log(plantId);
+    const routePath = ['/dashboard/info', plantId];
+    console.log('Navigating to:', routePath.join('/'));  // Imprime la ruta como una cadena
+    this.router.navigate(routePath);
   }
 
 }

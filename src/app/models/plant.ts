@@ -1,47 +1,25 @@
 export interface Plant {
-  id:                        number;
-  name:                      string;
-  country:                   string;
-  cityOrRegion:              string;
-  latitude:                  number;
-  longitude:                 number;
-  installedCapacity:         number;
-  startDate:                 Date;
-  owner:                     string;
-  status:                    string;
-  estimatedAnnualProduction: number;
-  emissionsAvoided:          number;
-  constructionCost:          number;
-  numberOfUnits:             number;
-  capacityFactor:            number;
-  technologyProvider:        string;
-  rating:                    number;
-  energyTypeId:              number;
-  energyTypeName:            string;
+  id:                           number;
+  name:                         string;
+  energyTypeId:                 number;
+  country:                      string;
+  cityOrRegion:                 string;
+  latitude:                     number;
+  longitude:                    number;
+  installedCapacity:            number;
+  startDate:                    Date;
+  owner:                        string;
+  status:                       string;
+  estimatedAnnualProduction:    number;
+  emissionsAvoided:             number;
+  constructionCost:             number;
+  numberOfUnits:                number;
+  capacityFactor:               number;
+  technologyProvider:           string;
+  rating:                       number;
+  history:                      string;
+  renewableEnergyDataHistories: null;
 }
-
-// export interface Plant {
-//   id: number;
-//   name: string;
-//   energyTypeId: number;
-//   energyType: null;
-//   country: string;
-//   cityOrRegion: string;
-//   latitude: number;
-//   longitude: number;
-//   installedCapacity: number;
-//   startDate: Date;
-//   owner: string;
-//   status: string;
-//   estimatedAnnualProduction: number;
-//   emissionsAvoided: number;
-//   constructionCost: number;
-//   numberOfUnits: number;
-//   capacityFactor: number;
-//   technologyProvider: string;
-//   rating: number;
-// }
-
 
 export interface HistoricPlant {
   historyId: number;
