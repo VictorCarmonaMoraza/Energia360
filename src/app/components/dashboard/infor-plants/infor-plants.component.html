@@ -19,20 +19,14 @@
         </div>
         <div class="col-4">
           <div class="form-group">
-            <label>Capacidad:</label>
-            <input formControlName="capacityFactorPlant" class="form-control" readonly />
+            <label>Tipo:</label>
+            <input formControlName="energyTypePlant" class="form-control" readonly />
           </div>
         </div>
       </div>
 
       <!--Fila 2-->
       <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label>Tipo:</label>
-            <input formControlName="energyTypePlant" class="form-control" readonly />
-          </div>
-        </div>
         <div class="col-4">
           <div class="form-group">
             <label>Estado:</label>
@@ -45,16 +39,16 @@
             <input formControlName="cityOrRegionPlant" class="form-control" />
           </div>
         </div>
-      </div>
-
-      <!--Fila 3-->
-      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Latitud</label>
             <input formControlName="latitudePlant" class="form-control" />
           </div>
         </div>
+      </div>
+
+      <!--Fila 3-->
+      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Longitud</label>
@@ -67,16 +61,16 @@
             <input formControlName="installedCapacityPlant" class="form-control" />
           </div>
         </div>
-      </div>
-
-      <!--Fila 4-->
-      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Fecha de Inicio</label>
             <input formControlName="startDatePlant" class="form-control" />
           </div>
         </div>
+      </div>
+
+      <!--Fila 4-->
+      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Propietario</label>
@@ -89,16 +83,16 @@
             <input formControlName="statusPlant" class="form-control" />
           </div>
         </div>
-      </div>
-
-      <!--fila 5-->
-      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Producción Anual Estimada</label>
             <input formControlName="estimatedAnnualProductionPlant" class="form-control" />
           </div>
         </div>
+      </div>
+
+      <!--fila 5-->
+      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Emisiones Evitadas</label>
@@ -111,29 +105,29 @@
             <input formControlName="constructionCostPlant" class="form-control" />
           </div>
         </div>
-      </div>
-
-      <!--Fila 6-->
-      <div class="row">
-        <div class="col-3">
+        <div class="col-4">
           <div class="form-group">
             <label>Número de Unidades</label>
             <input formControlName="numberOfUnitsPlant" class="form-control" />
           </div>
         </div>
-        <div class="col-3">
+      </div>
+
+      <!--Fila 6-->
+      <div class="row">
+        <div class="col-4">
           <div class="form-group">
             <label>Factor de Capacidad</label>
             <input formControlName="capacityFactorPlant" class="form-control" />
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <div class="form-group">
             <label>Proveedor de Tecnología</label>
             <input formControlName="technologyProviderPlant" class="form-control" />
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <div class="form-group">
             <label>Calificación</label>
             <input formControlName="ratingPlant" class="form-control" />
@@ -149,5 +143,8 @@
           </div>
         </div>
       </div>
+
+      <button class="btn btn-primary mt-5 float-end" routerLink="/dashboard">Volver</button>
+
     </form>
   <!-- </div> -->

@@ -38,7 +38,7 @@ export class CreatePlantsComponent implements OnInit {
   initForm() {
     //Obtains the data of type of energy
     this.loadEnergyType();
-    
+
     //Load form
     this.plantaFormNew = this.fb.group({
       name: [''],
@@ -59,5 +59,9 @@ export class CreatePlantsComponent implements OnInit {
       technologyProvider: [''],
       rating: ['']
     });
+  }
+
+  onSubmit(){
+    console.log(this.plantaFormNew.value);
   }
 }

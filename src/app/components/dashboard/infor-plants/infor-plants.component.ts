@@ -63,6 +63,7 @@ export class InforPLantsComponent implements OnInit {
     this.plantaFormInfo = this.fb.group({
       namePlant: [{ value: data.name || '', disabled: true }],
       energyTypePlant: [{ value: data.nameEnergy || '', disabled: true }],
+      capacityPlant:[{ value: data.installedCapacity || '', disabled: true }],
       countryPlant: [{ value: data.country || '', disabled: true }],
       cityOrRegionPlant: [{ value: data.cityOrRegion || '', disabled: true }],
       latitudePlant: [{ value: data.latitude || '', disabled: true }],
