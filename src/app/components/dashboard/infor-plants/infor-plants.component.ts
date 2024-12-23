@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PlantService } from '../../../services/plant.service';
 import { Plant } from '../../../models/plant';
+import { EnergyService } from '../../../services/energy.service';
+import { EnergyType } from '../../../models/energy';
+import { map, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-infor-plants',
@@ -14,12 +17,14 @@ export class InforPLantsComponent implements OnInit {
   private plantId: number;
   private dataPlant: Plant;
   plantaFormInfo: FormGroup;
+  private nameEnergy: string = '';
 
   //Constructor
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private plantService: PlantService
+    private plantService: PlantService,
+    private enrgyService: EnergyService
   ) { }
 
   //Inicializador del componente
@@ -30,10 +35,18 @@ export class InforPLantsComponent implements OnInit {
     this.getDataPlant(this.plantId);
   }
 
-  //Obtener todos los datos de la planta seleccionada para mostrar en el formulario
-  getDataPlant(plantid: number) {
-    this.plantService.getDataPlantById(plantid).subscribe({
-      next: (response: Plant) => {
+  getDataPlant(plantId: number) {
+    this.plantService.getDataPlantById(plantId).pipe(
+      switchMap((response: Plant) => {
+        return this.enrgyService.getTypeEnergyById(response.energyTypeId).pipe(
+          map((responseEnergy: EnergyType) => {
+            response.nameEnergy = responseEnergy.name;
+            return response; // Devuelve el objeto Plant modificado
+          })
+        );
+      })
+    ).subscribe({
+      next: (response) => {
         this.mainForm(response);
       },
       error: (err) => {
@@ -42,13 +55,14 @@ export class InforPLantsComponent implements OnInit {
       complete: () => {
         console.log('Request completed');
       }
-    })
+    });
   }
 
   mainForm(data: Plant) {
+    console.log(this.nameEnergy);
     this.plantaFormInfo = this.fb.group({
       namePlant: [{ value: data.name || '', disabled: true }],
-      energyTypePlant: [{ value: data.energyTypeId || '', disabled: true }],
+      energyTypePlant: [{ value: data.nameEnergy || '', disabled: true }],
       countryPlant: [{ value: data.country || '', disabled: true }],
       cityOrRegionPlant: [{ value: data.cityOrRegion || '', disabled: true }],
       latitudePlant: [{ value: data.latitude || '', disabled: true }],

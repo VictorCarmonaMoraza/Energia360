@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HistoricPlant, Plant } from '../models/plant';
+import { EndpointsBack } from '../EndpointsBack/endpoints.app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlantService {
 
-  urlApi:string ='http://localhost:5018/api';
+  urlApi:string = EndpointsBack.LOCALHOSTS_HTTP;
   typeUrlApi:string ='plant';
 
 

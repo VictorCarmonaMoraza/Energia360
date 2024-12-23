@@ -19,6 +19,7 @@ export interface Plant {
   rating:                       number;
   history:                      string;
   renewableEnergyDataHistories: null;
+  nameEnergy : string;
 }
 
 export interface HistoricPlant {

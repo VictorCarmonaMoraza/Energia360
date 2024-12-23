@@ -1,6 +1,6 @@
 export class EndpointsBack {
-  public static readonly LOCALHOSTS_HTTP: string = 'http://localhost:5018/api/';
-  public static readonly LOCALHOSTS_HTTPS: string = 'https://localhost:5018/api/';
+  public static readonly LOCALHOSTS_HTTP: string = 'http://localhost:5018/api';
+  public static readonly LOCALHOSTS_HTTPS: string = 'https://localhost:5018/api';
 
   // API USER
   public static readonly URL_USERS: string = 'user';
