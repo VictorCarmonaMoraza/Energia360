@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PlantService } from '../../../services/plant.service';
-import { Plant } from '../../../models/plant';
+import { RenewableEnergyPlant } from '../../../models/plant';
 import { EnergyService } from '../../../services/energy.service';
 import { EnergyType } from '../../../models/energy';
 import { map, switchMap, tap } from 'rxjs';
@@ -15,7 +15,7 @@ import { map, switchMap, tap } from 'rxjs';
 export class InforPLantsComponent implements OnInit {
 
   private plantId: number;
-  private dataPlant: Plant;
+  private dataPlant: RenewableEnergyPlant;
   plantaFormInfo: FormGroup;
   private nameEnergy: string = '';
 
@@ -37,7 +37,7 @@ export class InforPLantsComponent implements OnInit {
 
   getDataPlant(plantId: number) {
     this.plantService.getDataPlantById(plantId).pipe(
-      switchMap((response: Plant) => {
+      switchMap((response: RenewableEnergyPlant) => {
         return this.enrgyService.getTypeEnergyById(response.energyTypeId).pipe(
           map((responseEnergy: EnergyType) => {
             response.nameEnergy = responseEnergy.name;
@@ -58,7 +58,7 @@ export class InforPLantsComponent implements OnInit {
     });
   }
 
-  mainForm(data: Plant) {
+  mainForm(data: RenewableEnergyPlant) {
     console.log(this.nameEnergy);
     this.plantaFormInfo = this.fb.group({
       namePlant: [{ value: data.name || '', disabled: true }],

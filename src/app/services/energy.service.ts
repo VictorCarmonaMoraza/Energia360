@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Plant } from '../models/plant';
+import { RenewableEnergyPlant } from '../models/plant';
 import { EnergyType } from '../models/energy';
 import { EndpointsBack } from '../EndpointsBack/endpoints.app';
 

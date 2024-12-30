@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HistoricPlant, Plant } from '../models/plant';
+import { HistoricPlant, RenewableEnergyPlant, RenewableEnergyPlantCreation } from '../models/plant';
 import { EndpointsBack } from '../EndpointsBack/endpoints.app';
 
 @Injectable({
@@ -9,15 +9,15 @@ import { EndpointsBack } from '../EndpointsBack/endpoints.app';
 })
 export class PlantService {
 
-  urlApi:string = EndpointsBack.LOCALHOSTS_HTTP;
-  typeUrlApi:string ='plant';
+  urlApi: string = EndpointsBack.LOCALHOSTS_HTTP;
+  typeUrlApi: string = 'plant';
 
 
   constructor(private http: HttpClient) { }
 
-  getAllPlants(): Observable<Plant[]> {
+  getAllPlants(): Observable<RenewableEnergyPlant[]> {
     //console.log(`${this.Url}${this.Url_User}${this.allUsersList}`);
-    return this.http.get<Plant[]>(`${this.urlApi}/${this.typeUrlApi}/allPlants`)
+    return this.http.get<RenewableEnergyPlant[]>(`${this.urlApi}/${this.typeUrlApi}/allPlants`)
   }
 
   getHistoricPlant(idPlant: number): Observable<HistoricPlant[]> {
@@ -29,8 +29,8 @@ export class PlantService {
    * @param idPlant id de la planta
    * @returns informacion de la planta
    */
-  getDataPlantById(idPlant:number):Observable<Plant>{
-    return this.http.get<Plant>(`${this.urlApi}/${this.typeUrlApi}/info/${idPlant}`);
+  getDataPlantById(idPlant: number): Observable<RenewableEnergyPlant> {
+    return this.http.get<RenewableEnergyPlant>(`${this.urlApi}/${this.typeUrlApi}/info/${idPlant}`);
   }
 
   importFile(data: FormData): Observable<any> {
@@ -38,6 +38,14 @@ export class PlantService {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+  postCreatePlant(data: RenewableEnergyPlantCreation): Observable<RenewableEnergyPlantCreation> {
+    console.log(`${this.urlApi}/${this.typeUrlApi}/create`);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<RenewableEnergyPlantCreation>(`${this.urlApi}/${this.typeUrlApi}/create`, data, { headers });
   }
 
 }

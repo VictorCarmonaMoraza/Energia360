@@ -8,4 +8,8 @@ export class EndpointsBack {
   public static readonly ALL_USERS: string = '/allUsers';
   // Crea un Usuario
   public static readonly CREATE_USER: string = '/create';
+
+
+  //API RenewableEnergyPlantController
+  public static readonly URL_CREATE_PLANT: string = '/create'
 }

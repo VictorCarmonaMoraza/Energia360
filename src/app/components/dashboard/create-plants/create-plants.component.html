@@ -29,7 +29,7 @@
         <div class="col-4">
           <div class="form-group">
             <label>Tipo</label>
-            <select formControlName="energyType" class="form-control">
+            <select formControlName="energyTypeId" class="form-control">
               <option value="">Seleccione un tipo</option>
               <option *ngFor="let type of energyTypes" [value]="type.energyTypeId">{{ type.name }}</option>
             </select>
@@ -88,20 +88,14 @@
         </div>
         <div class="col-4">
           <div class="form-group">
-            <label>Estado</label>
-            <input formControlName="status" class="form-control" />
+            <label>Producción Anual Estimada</label>
+            <input formControlName="estimatedAnnualProduction" class="form-control" />
           </div>
         </div>
       </div>
 
       <!--fila 5-->
       <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label>Producción Anual Estimada</label>
-            <input formControlName="estimatedAnnualProduction" class="form-control" />
-          </div>
-        </div>
         <div class="col-4">
           <div class="form-group">
             <label>Emisiones Evitadas</label>
@@ -114,32 +108,43 @@
             <input formControlName="constructionCost" class="form-control" />
           </div>
         </div>
-      </div>
-
-      <!--Fila 6-->
-      <div class="row">
-        <div class="col-3">
+        <div class="col-4">
           <div class="form-group">
             <label>Número de Unidades</label>
             <input formControlName="numberOfUnits" class="form-control" />
           </div>
         </div>
-        <div class="col-3">
+      </div>
+
+      <!--Fila 6-->
+      <div class="row">
+
+        <div class="col-4">
           <div class="form-group">
             <label>Factor de Capacidad</label>
             <input formControlName="capacityFactor" class="form-control" />
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <div class="form-group">
             <label>Proveedor de Tecnología</label>
             <input formControlName="technologyProvider" class="form-control" />
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <div class="form-group">
             <label>Calificación</label>
             <input formControlName="rating" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <!--Fila 7-->
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Informacion</label>
+            <textarea formControlName="history" class="form-control" rows="7"></textarea>
           </div>
         </div>
       </div>

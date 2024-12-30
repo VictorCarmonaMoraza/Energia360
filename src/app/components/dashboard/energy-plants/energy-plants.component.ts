@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PlantService } from '../../../services/plant.service';
-import { HistoricPlant, Plant } from '../../../models/plant';
+import { HistoricPlant, RenewableEnergyPlant } from '../../../models/plant';
 import L, { Icon, Map, Marker, marker, tileLayer } from 'leaflet';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
@@ -25,7 +25,7 @@ interface Column {
 export class EnergyPlantsComponent implements OnInit {
 
   plantaForm: FormGroup;
-  plants: Plant[] = [];
+  plants: RenewableEnergyPlant[] = [];
   historicPlant: HistoricPlant[] = [];
   private map!: Map;
   private plantMarkers: Marker[] = []
@@ -78,7 +78,7 @@ export class EnergyPlantsComponent implements OnInit {
 
   }
 
-  initForm(plant: Plant) {
+  initForm(plant: RenewableEnergyPlant) {
     this.plantaForm.patchValue({
       name: plant.name,
       energyType: plant.energyTypeId,
@@ -111,7 +111,7 @@ export class EnergyPlantsComponent implements OnInit {
     }).addTo(this.map);
   }
 
-  addAllMarkers(plants: Plant[]) {
+  addAllMarkers(plants: RenewableEnergyPlant[]) {
     // Limpiar cualquier marcador previo en el mapa
     this.plantMarkers.forEach(marker => this.map.removeLayer(marker));
     this.plantMarkers = [];
@@ -246,7 +246,7 @@ export class EnergyPlantsComponent implements OnInit {
   //Obtener todas las plantas de energias renovables
   getListPlant() {
     this.plantService.getAllPlants().subscribe({
-      next: (response: Plant[]) => {
+      next: (response: RenewableEnergyPlant[]) => {
         // Aquí se maneja la respuesta exitosa
         console.log('Response:', response);
         this.plants = response;
@@ -282,7 +282,7 @@ export class EnergyPlantsComponent implements OnInit {
   //   }
   // }
 
-  selectPlant(plant: Plant) {
+  selectPlant(plant: RenewableEnergyPlant) {
     // Asegurarse de que el mapa esté inicializado
     if (!this.map) {
       console.error('El mapa no está inicializado.');
