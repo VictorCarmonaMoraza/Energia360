@@ -1,25 +1,34 @@
 <div class="row">
   <div class="col p-5">
     <h2>Creacion de planta</h2>
-    <form [formGroup]="plantaFormNew" (ngSubmit)="onSubmit()">
+    <form [formGroup]="plantaFormNew" (ngSubmit)="onSubmit()" autocomplete="off">
       <!--Fila 1-->
       <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Nombre:</label>
-            <input formControlName="name" class="form-control" />
+            <input type="text" formControlName="name" class="form-control" placeholder="Nombre de la nueva planta" />
+            <span class="form-text text-danger">
+              La planta tiene que tener nombre
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Ubicación:</label>
-            <input formControlName="country" class="form-control" />
+            <input type="text" formControlName="country" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener ubicacion (Pais donde se encuentra)
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Capacidad:</label>
-            <input formControlName="capacityFactor" class="form-control" />
+            <input type="number" formControlName="capacityFactor" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener factor de capacidad
+            </span>
           </div>
         </div>
       </div>
@@ -39,13 +48,19 @@
         <div class="col-4">
           <div class="form-group">
             <label>Estado:</label>
-            <input formControlName="status" class="form-control" />
+            <input type="text" formControlName="status" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener un estado (operativa,inoperativa, remodelacion)
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Ciudad o Región</label>
-            <input formControlName="cityOrRegion" class="form-control" />
+            <input type="text" formControlName="cityOrRegion" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener la ciudad en la cual se encuentra
+            </span>
           </div>
         </div>
       </div>
@@ -55,19 +70,28 @@
         <div class="col-4">
           <div class="form-group">
             <label>Latitud</label>
-            <input formControlName="latitude" class="form-control" />
+            <input type="number" formControlName="latitude" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener latitud
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Longitud</label>
-            <input formControlName="longitude" class="form-control" />
+            <input type="number" formControlName="longitude" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener longitud
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Capacidad Instalada</label>
-            <input formControlName="installedCapacity" class="form-control" />
+            <input type="number" formControlName="installedCapacity" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener capacidad instalada
+            </span>
           </div>
         </div>
       </div>
@@ -78,18 +102,27 @@
           <div class="form-group">
             <label>Fecha de Inicio</label>
             <input formControlName="startDate" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener la fecha de inicio
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Propietario</label>
-            <input formControlName="owner" class="form-control" />
+            <input type="text" formControlName="owner" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener el nombre del propietario
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Producción Anual Estimada</label>
-            <input formControlName="estimatedAnnualProduction" class="form-control" />
+            <input type="number" formControlName="estimatedAnnualProduction" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener la produccion anual estimada
+            </span>
           </div>
         </div>
       </div>
@@ -99,19 +132,28 @@
         <div class="col-4">
           <div class="form-group">
             <label>Emisiones Evitadas</label>
-            <input formControlName="emissionsAvoided" class="form-control" />
+            <input type="number" formControlName="emissionsAvoided" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener las emisiones emitidas
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Costo de Construcción</label>
-            <input formControlName="constructionCost" class="form-control" />
+            <input type="number" formControlName="constructionCost" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener el costo de su construccion
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Número de Unidades</label>
-            <input formControlName="numberOfUnits" class="form-control" />
+            <input type="number" formControlName="numberOfUnits" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener el numero de unidades
+            </span>
           </div>
         </div>
       </div>
@@ -119,22 +161,28 @@
       <!--Fila 6-->
       <div class="row">
 
-        <div class="col-4">
+        <!-- <div class="col-4">
           <div class="form-group">
             <label>Factor de Capacidad</label>
-            <input formControlName="capacityFactor" class="form-control" />
+            <input type="number" formControlName="capacityFactor" class="form-control" />
           </div>
-        </div>
+        </div> -->
         <div class="col-4">
           <div class="form-group">
             <label>Proveedor de Tecnología</label>
-            <input formControlName="technologyProvider" class="form-control" />
+            <input type="text" formControlName="technologyProvider" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener el proveedor de tecnologia
+            </span>
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
             <label>Calificación</label>
-            <input formControlName="rating" class="form-control" />
+            <input type="number" formControlName="rating" class="form-control" />
+            <span class="form-text text-danger">
+              La planta debe tener la calificacion
+            </span>
           </div>
         </div>
       </div>
