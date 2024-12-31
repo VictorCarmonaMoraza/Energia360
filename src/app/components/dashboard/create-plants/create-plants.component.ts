@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlantService } from '../../../services/plant.service';
 import { EnergyType } from '../../../models/energy';
 import { EnergyService } from '../../../services/energy.service';
@@ -43,23 +43,23 @@ export class CreatePlantsComponent implements OnInit {
 
     //Load form
     this.plantaFormNew = this.fb.group({
-      name: [''],
-      energyTypeId: [''],
-      country: [''],
-      cityOrRegion: [''],
-      latitude: [''],
-      longitude: [''],
-      installedCapacity: [0],
-      startDate: [''],
-      owner: [''],
-      status: [''],
-      estimatedAnnualProduction: [0],
-      emissionsAvoided: [0],
-      constructionCost: [0],
-      numberOfUnits: [0],
-      capacityFactor: [0],
-      technologyProvider: [''],
-      rating: [0],
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      energyTypeId: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      cityOrRegion: ['', [Validators.required]],
+      latitude: ['', [Validators.required]],
+      longitude: ['', [Validators.required]],
+      installedCapacity: [0, [Validators.required]],
+      startDate: ['', [Validators.required]],
+      owner: ['', [Validators.required, Validators.minLength(5)]],
+      status: ['', [Validators.required]],
+      estimatedAnnualProduction: [0, [Validators.required]],
+      emissionsAvoided: [0, [Validators.required]],
+      constructionCost: [0, [Validators.required]],
+      numberOfUnits: [0, [Validators.required]],
+      capacityFactor: [0, [Validators.required]],
+      technologyProvider: ['', [Validators.required]],
+      rating: [0, [Validators.required]],
       history: ['']
     });
   }
@@ -92,55 +92,59 @@ export class CreatePlantsComponent implements OnInit {
     //   };
 
     console.log(this.plantaFormNew.controls['energyTypeId'].value)
-      const getFormValueOrEmpty = (controlName: string): any => {
-        console.log(this.plantaFormNew.controls[controlName].value);
-        const value = this.plantaFormNew.controls[controlName].value;
-        return value !== undefined ? value : ""; // Devuelve el valor o vacío si es undefined
-      };
+    const getFormValueOrEmpty = (controlName: string): any => {
+      console.log(this.plantaFormNew.controls[controlName].value);
+      const value = this.plantaFormNew.controls[controlName].value;
+      return value !== undefined ? value : ""; // Devuelve el valor o vacío si es undefined
+    };
 
-      const getSelectValueOrNull = (controlName: string): any => {
-        const value = this.plantaFormNew.controls[controlName].value;
-        return value !== undefined && value !== null ? value : null; // Devuelve null para selects si no hay valor
-      };
+    const getSelectValueOrNull = (controlName: string): any => {
+      const value = this.plantaFormNew.controls[controlName].value;
+      return value !== undefined && value !== null ? value : null; // Devuelve null para selects si no hay valor
+    };
 
-      const mockRenewableEnergyPlant: RenewableEnergyPlantCreation = {
-        name: getFormValueOrEmpty('name'),
-        energyTypeId: getFormValueOrEmpty('energyTypeId'),
-        country: getFormValueOrEmpty('country'),
-        cityOrRegion: getFormValueOrEmpty('cityOrRegion'),
-        latitude: getFormValueOrEmpty('latitude'),
-        longitude: getFormValueOrEmpty('longitude'),
-        installedCapacity: getFormValueOrEmpty('installedCapacity'),
-        startDate: getFormValueOrEmpty('startDate'),
-        owner: getFormValueOrEmpty('owner'),
-        status: getFormValueOrEmpty('status'),
-        estimatedAnnualProduction: getFormValueOrEmpty('estimatedAnnualProduction'),
-        emissionsAvoided: getFormValueOrEmpty('emissionsAvoided'),
-        constructionCost: getFormValueOrEmpty('constructionCost'),
-        numberOfUnits: getFormValueOrEmpty('numberOfUnits'),
-        capacityFactor: getFormValueOrEmpty('capacityFactor'),
-        technologyProvider: getFormValueOrEmpty('technologyProvider'),
-        rating: getFormValueOrEmpty('rating'),
-        history: getFormValueOrEmpty('history'),
-        // renewableEnergyDataHistories: [], // Propiedad opcional vacía
-        // nameEnergy: "" // Propiedad opcional vacía
-      };
+    const mockRenewableEnergyPlant: RenewableEnergyPlantCreation = {
+      name: getFormValueOrEmpty('name'),
+      energyTypeId: getFormValueOrEmpty('energyTypeId'),
+      country: getFormValueOrEmpty('country'),
+      cityOrRegion: getFormValueOrEmpty('cityOrRegion'),
+      latitude: getFormValueOrEmpty('latitude'),
+      longitude: getFormValueOrEmpty('longitude'),
+      installedCapacity: getFormValueOrEmpty('installedCapacity'),
+      startDate: getFormValueOrEmpty('startDate'),
+      owner: getFormValueOrEmpty('owner'),
+      status: getFormValueOrEmpty('status'),
+      estimatedAnnualProduction: getFormValueOrEmpty('estimatedAnnualProduction'),
+      emissionsAvoided: getFormValueOrEmpty('emissionsAvoided'),
+      constructionCost: getFormValueOrEmpty('constructionCost'),
+      numberOfUnits: getFormValueOrEmpty('numberOfUnits'),
+      capacityFactor: getFormValueOrEmpty('capacityFactor'),
+      technologyProvider: getFormValueOrEmpty('technologyProvider'),
+      rating: getFormValueOrEmpty('rating'),
+      history: getFormValueOrEmpty('history'),
+      // renewableEnergyDataHistories: [], // Propiedad opcional vacía
+      // nameEnergy: "" // Propiedad opcional vacía
+    };
 
-      this.plantService.postCreatePlant(mockRenewableEnergyPlant).subscribe({
-        next: (response) => {
-          console.log("Se creo la planta correctamente", response);
-        },
-        error: (error) => {
-          console.log("error al crear la planta", error);
-        },
-        // complete: () => {
-        //   console.log('Request completed');
-        // }
-      });
+    this.plantService.postCreatePlant(mockRenewableEnergyPlant).subscribe({
+      next: (response) => {
+        console.log("Se creo la planta correctamente", response);
+      },
+      error: (error) => {
+        console.log("error al crear la planta", error);
+      },
+      // complete: () => {
+      //   console.log('Request completed');
+      // }
+    });
     // }
     // else {
     //   console.error('Form is invalid');
     // }
 
+  }
+
+  cleanFrom() {
+    this.plantaFormNew.reset();
   }
 }
