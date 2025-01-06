@@ -1,39 +1,4 @@
-// export interface RenewableEnergyPlant {
-//   id:                           number;
-//   name:                         string;
-//   energyTypeId:                 number;
-//   country:                      string;
-//   cityOrRegion:                 string;
-//   latitude:                     number;
-//   longitude:                    number;
-//   installedCapacity:            number;
-//   startDate:                    Date;
-//   owner:                        string;
-//   status:                       string;
-//   estimatedAnnualProduction:    number;
-//   emissionsAvoided:             number;
-//   constructionCost:             number;
-//   numberOfUnits:                number;
-//   capacityFactor:               number;
-//   technologyProvider:           string;
-//   rating:                       number;
-//   history:                      string;
-//   renewableEnergyDataHistories?: null;
-//   nameEnergy : string;
-// }
 
-// export interface HistoricPlant {
-//   historyId: number;
-//   plantId: number;
-//   recordDate: Date;
-//   estimatedAnnualProduction: number;
-//   emissionsAvoided: number;
-//   constructionCostAmpliacion: number;
-//   numberOfUnits: number;
-//   capacityFactor: number;
-//   technologyProvider: TechnologyProvider;
-//   rating: number;
-// }
 
 export enum TechnologyProvider {
   OtherTech = "OtherTech",
@@ -41,64 +6,61 @@ export enum TechnologyProvider {
 }
 
 
-//
-
 export interface RenewableEnergyPlant {
-  id:                           number;
-  name:                         string;
-  energyTypeId:                 number;
-  country:                      string;
-  cityOrRegion:                 string;
-  latitude:                     number;
-  longitude:                    number;
-  installedCapacity:            number;
-  startDate:                    Date;
-  owner:                        string;
-  status:                       string;
-  estimatedAnnualProduction:    number;
-  emissionsAvoided:             number;
-  constructionCost:             number;
-  numberOfUnits:                number;
-  capacityFactor:               number;
-  technologyProvider:           string;
-  rating:                       number;
-  history?:                      string;
+  id: number;
+  name: string;
+  energyTypeId: number;
+  country: string;
+  cityOrRegion: string;
+  latitude: number;
+  longitude: number;
+  installedCapacity: number;
+  startDate: Date;
+  owner: string;
+  status: string;
+  estimatedAnnualProduction: number;
+  emissionsAvoided: number;
+  constructionCost: number;
+  numberOfUnits: number;
+  capacityFactor: number;
+  technologyProvider: string;
+  rating: number;
+  history?: string;
   renewableEnergyDataHistories?: HistoricPlant[];
   nameEnergy?: string
 }
 
-export interface RenewableEnergyPlantCreation  {
-  name:                         string;
-  energyTypeId:                 number;
-  country:                      string;
-  cityOrRegion:                 string;
-  latitude:                     number;
-  longitude:                    number;
-  installedCapacity:            number;
-  startDate:                    Date;
-  owner:                        string;
-  status:                       string;
-  estimatedAnnualProduction:    number;
-  emissionsAvoided:             number;
-  constructionCost:             number;
-  numberOfUnits:                number;
-  capacityFactor:               number;
-  technologyProvider:           string;
-  rating:                       number;
-  history?:                      string;
-  renewableEnergyDataHistories?: HistoricPlant[];
-  nameEnergy?: string
+export interface Plant {
+  id?: number;
+  name: string;
+  energyTypeId: number;
+  country: string;
+  cityOrRegion: string;
+  latitude: number;
+  longitude: number;
+  installedCapacity: number;
+  startDate: Date;
+  owner: string;
+  status: string;
+  estimatedAnnualProduction: number;
+  emissionsAvoided: number;
+  constructionCost: number;
+  numberOfUnits: number;
+  capacityFactor: number;
+  technologyProvider: string;
+  rating: number;
+  history: string;
 }
 
 export interface HistoricPlant {
-  historyId:                  number;
-  plantId:                    number;
-  recordDate:                 Date;
-  estimatedAnnualProduction:  number;
-  emissionsAvoided:           number;
+  historyId: number;
+  plantId: number;
+  recordDate: Date;
+  estimatedAnnualProduction: number;
+  emissionsAvoided: number;
   constructionCostAmpliacion: number;
-  numberOfUnits:              number;
-  capacityFactor:             number;
-  technologyProvider:         string;
-  rating:                     number;
+  numberOfUnits: number;
+  capacityFactor: number;
+  technologyProvider: string;
+  rating: number;
 }

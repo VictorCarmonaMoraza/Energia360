@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col p-5">
     <h2>Creacion de planta</h2>
-    <form [formGroup]="plantaFormNew" (ngSubmit)="onSubmit()" autocomplete="off">
+    <form [formGroup]="plantForm" (ngSubmit)="createPlant()" autocomplete="off">
       <!--Fila 1-->
       <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label>Nombre:</label>
             <input type="text" formControlName="name" class="form-control" placeholder="Nombre de la nueva planta" />
-            <span class="form-text text-danger">
-              La planta tiene que tener nombre
+            <span *ngIf="isValidFields('name')"  class="form-text text-danger">
+              {{getFieldError('name')}}
             </span>
           </div>
         </div>
@@ -17,8 +17,8 @@
           <div class="form-group">
             <label>Ubicación:</label>
             <input type="text" formControlName="country" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener ubicacion (Pais donde se encuentra)
+            <span *ngIf="isValidFields('country')"  class="form-text text-danger">
+              {{getFieldError('country')}}
             </span>
           </div>
         </div>
@@ -26,8 +26,8 @@
           <div class="form-group">
             <label>Capacidad:</label>
             <input type="number" formControlName="capacityFactor" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener factor de capacidad
+            <span *ngIf="isValidFields('capacityFactor')"  class="form-text text-danger">
+              {{getFieldError('capacityFactor')}}
             </span>
           </div>
         </div>
@@ -49,8 +49,8 @@
           <div class="form-group">
             <label>Estado:</label>
             <input type="text" formControlName="status" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener un estado (operativa,inoperativa, remodelacion)
+            <span *ngIf="isValidFields('status')"  class="form-text text-danger">
+              {{getFieldError('status')}}
             </span>
           </div>
         </div>
@@ -58,8 +58,8 @@
           <div class="form-group">
             <label>Ciudad o Región</label>
             <input type="text" formControlName="cityOrRegion" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener la ciudad en la cual se encuentra
+            <span *ngIf="isValidFields('cityOrRegion')"  class="form-text text-danger">
+              {{getFieldError('cityOrRegion')}}
             </span>
           </div>
         </div>
@@ -71,8 +71,8 @@
           <div class="form-group">
             <label>Latitud</label>
             <input type="number" formControlName="latitude" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener latitud
+            <span *ngIf="isValidFields('latitude')"  class="form-text text-danger">
+              {{getFieldError('latitude')}}
             </span>
           </div>
         </div>
@@ -80,8 +80,8 @@
           <div class="form-group">
             <label>Longitud</label>
             <input type="number" formControlName="longitude" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener longitud
+            <span *ngIf="isValidFields('longitude')"  class="form-text text-danger">
+              {{getFieldError('longitude')}}
             </span>
           </div>
         </div>
@@ -89,8 +89,8 @@
           <div class="form-group">
             <label>Capacidad Instalada</label>
             <input type="number" formControlName="installedCapacity" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener capacidad instalada
+            <span *ngIf="isValidFields('installedCapacity')"  class="form-text text-danger">
+              {{getFieldError('installedCapacity')}}
             </span>
           </div>
         </div>
@@ -102,8 +102,8 @@
           <div class="form-group">
             <label>Fecha de Inicio</label>
             <input formControlName="startDate" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener la fecha de inicio
+            <span *ngIf="isValidFields('startDate')"  class="form-text text-danger">
+              {{getFieldError('startDate')}}
             </span>
           </div>
         </div>
@@ -111,8 +111,8 @@
           <div class="form-group">
             <label>Propietario</label>
             <input type="text" formControlName="owner" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener el nombre del propietario
+            <span *ngIf="isValidFields('owner')"  class="form-text text-danger">
+              {{getFieldError('owner')}}
             </span>
           </div>
         </div>
@@ -120,8 +120,8 @@
           <div class="form-group">
             <label>Producción Anual Estimada</label>
             <input type="number" formControlName="estimatedAnnualProduction" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener la produccion anual estimada
+            <span *ngIf="isValidFields('estimatedAnnualProduction')"  class="form-text text-danger">
+              {{getFieldError('estimatedAnnualProduction')}}
             </span>
           </div>
         </div>
@@ -133,8 +133,8 @@
           <div class="form-group">
             <label>Emisiones Evitadas</label>
             <input type="number" formControlName="emissionsAvoided" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener las emisiones emitidas
+            <span *ngIf="isValidFields('emissionsAvoided')"  class="form-text text-danger">
+              {{getFieldError('emissionsAvoided')}}
             </span>
           </div>
         </div>
@@ -142,8 +142,8 @@
           <div class="form-group">
             <label>Costo de Construcción</label>
             <input type="number" formControlName="constructionCost" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener el costo de su construccion
+            <span *ngIf="isValidFields('constructionCost')"  class="form-text text-danger">
+              {{getFieldError('constructionCost')}}
             </span>
           </div>
         </div>
@@ -151,8 +151,8 @@
           <div class="form-group">
             <label>Número de Unidades</label>
             <input type="number" formControlName="numberOfUnits" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener el numero de unidades
+            <span *ngIf="isValidFields('numberOfUnits')"  class="form-text text-danger">
+              {{getFieldError('numberOfUnits')}}
             </span>
           </div>
         </div>
@@ -160,19 +160,12 @@
 
       <!--Fila 6-->
       <div class="row">
-
-        <!-- <div class="col-4">
-          <div class="form-group">
-            <label>Factor de Capacidad</label>
-            <input type="number" formControlName="capacityFactor" class="form-control" />
-          </div>
-        </div> -->
         <div class="col-4">
           <div class="form-group">
             <label>Proveedor de Tecnología</label>
             <input type="text" formControlName="technologyProvider" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener el proveedor de tecnologia
+            <span *ngIf="isValidFields('technologyProvider')"  class="form-text text-danger">
+              {{getFieldError('technologyProvider')}}
             </span>
           </div>
         </div>
@@ -180,8 +173,8 @@
           <div class="form-group">
             <label>Calificación</label>
             <input type="number" formControlName="rating" class="form-control" />
-            <span class="form-text text-danger">
-              La planta debe tener la calificacion
+            <span *ngIf="isValidFields('rating')"  class="form-text text-danger">
+              {{getFieldError('rating')}}
             </span>
           </div>
         </div>
@@ -197,11 +190,11 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary mt-5 float-end">Enviar</button>
+      <button type="submit" class="btn btn-primary mt-5 float-end" [disabled]="!plantForm.valid">Enviar</button>
 
       <button class="btn btn-primary mt-5 float-end m-3" routerLink="/dashboard">Volver</button>
 
-      <button class="btn btn-primary mt-5 float-end m-3" (click)="cleanFrom()">Limpiar</button>
+      <button class="btn btn-primary mt-5 float-end m-3" (click)="cleanFrom()" >Limpiar</button>
 
     </form>
   </div>

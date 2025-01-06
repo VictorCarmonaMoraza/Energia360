@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HistoricPlant, RenewableEnergyPlant, RenewableEnergyPlantCreation } from '../models/plant';
+import { HistoricPlant, RenewableEnergyPlant, Plant } from '../models/plant';
 import { EndpointsBack } from '../EndpointsBack/endpoints.app';
 
 @Injectable({
@@ -40,12 +40,13 @@ export class PlantService {
     });
   }
 
-  postCreatePlant(data: RenewableEnergyPlantCreation): Observable<RenewableEnergyPlantCreation> {
+  postCreatePlant(data: Plant): Observable<Plant> {
     console.log(`${this.urlApi}/${this.typeUrlApi}/create`);
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post<RenewableEnergyPlantCreation>(`${this.urlApi}/${this.typeUrlApi}/create`, data, { headers });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json'
+    // });
+    //return this.http.post<RenewableEnergyPlantCreation>(`${this.urlApi}/${this.typeUrlApi}/create`, data, { headers });
+    return this.http.post<Plant>(`${this.urlApi}/${this.typeUrlApi}/create`, data);
   }
 
 }

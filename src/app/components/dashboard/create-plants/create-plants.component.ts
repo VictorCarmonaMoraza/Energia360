@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlantService } from '../../../services/plant.service';
 import { EnergyType } from '../../../models/energy';
 import { EnergyService } from '../../../services/energy.service';
-import { RenewableEnergyPlant, RenewableEnergyPlantCreation } from '../../../models/plant';
+import { Plant, RenewableEnergyPlant } from '../../../models/plant';
 
 @Component({
   selector: 'app-create-plants',
@@ -12,7 +12,7 @@ import { RenewableEnergyPlant, RenewableEnergyPlantCreation } from '../../../mod
 })
 export class CreatePlantsComponent implements OnInit {
 
-  plantaFormNew: FormGroup;
+  plantForm : FormGroup;
   energyTypes: EnergyType[] = [];
 
   constructor(
@@ -22,7 +22,6 @@ export class CreatePlantsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.initForm();
   }
 
@@ -42,7 +41,7 @@ export class CreatePlantsComponent implements OnInit {
     this.loadEnergyType();
 
     //Load form
-    this.plantaFormNew = this.fb.group({
+    this.plantForm  = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       energyTypeId: ['', [Validators.required]],
       country: ['', [Validators.required]],
@@ -64,49 +63,27 @@ export class CreatePlantsComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(this.plantaFormNew.value);
-
-
-    // if (this.plantaFormNew.valid) {
-    //   const plantData: RenewableEnergyPlantCreation = {
-    //     name: this.plantaFormNew.value.name,
-    //     energyTypeId: this.plantaFormNew.value.energyTypeId,
-    //     country: this.plantaFormNew.value.country,
-    //     cityOrRegion: this.plantaFormNew.value.cityOrRegion,
-    //     latitude: this.plantaFormNew.value.latitude,
-    //     longitude: this.plantaFormNew.value.longitude,
-    //     installedCapacity: this.plantaFormNew.value.installedCapacity,
-    //     startDate: this.plantaFormNew.value.startDate,
-    //     owner: this.plantaFormNew.value.owner,
-    //     status: this.plantaFormNew.value.status,
-    //     estimatedAnnualProduction: this.plantaFormNew.value.estimatedAnnualProduction,
-    //     emissionsAvoided: this.plantaFormNew.value.emissionsAvoided,
-    //     constructionCost: this.plantaFormNew.value.constructionCost,
-    //     numberOfUnits: this.plantaFormNew.value.numberOfUnits,
-    //     capacityFactor: this.plantaFormNew.value.capacityFactor,
-    //     technologyProvider: this.plantaFormNew.value.technologyProvider,
-    //     rating: this.plantaFormNew.value.rating,
-    //     history: this.plantaFormNew.value.history,
-    //     renewableEnergyDataHistories: this.plantaFormNew.value.renewableEnergyDataHistories ?? [],
-    //   };
-
-    console.log(this.plantaFormNew.controls['energyTypeId'].value)
+  createPlant() {
     const getFormValueOrEmpty = (controlName: string): any => {
-      console.log(this.plantaFormNew.controls[controlName].value);
-      const value = this.plantaFormNew.controls[controlName].value;
+      let value = this.plantForm .controls[controlName].value;
+      if (controlName === 'startDate' && value) {
+        value = new Date(value).toISOString();  // Convierte la fecha a formato ISO si el campo es 'startDate'
+      }
       return value !== undefined ? value : ""; // Devuelve el valor o vacío si es undefined
     };
 
     const getSelectValueOrNull = (controlName: string): any => {
-      const value = this.plantaFormNew.controls[controlName].value;
+      const value = this.plantForm .controls[controlName].value;
       return value !== undefined && value !== null ? value : null; // Devuelve null para selects si no hay valor
     };
 
-    const mockRenewableEnergyPlant: RenewableEnergyPlantCreation = {
-      name: getFormValueOrEmpty('name'),
-      energyTypeId: getFormValueOrEmpty('energyTypeId'),
-      country: getFormValueOrEmpty('country'),
+    console.log(this.plantForm.controls['name'].value);
+    const mockRenewableEnergyPlant: Plant = {
+      name: this.plantForm.controls['name'].value,
+      energyTypeId: this.plantForm.controls['energyTypeId'].value,
+      //energyTypeId: getFormValueOrEmpty('energyTypeId'),
+      //country: getFormValueOrEmpty('country'),
+      country: this.plantForm.controls['country'].value,
       cityOrRegion: getFormValueOrEmpty('cityOrRegion'),
       latitude: getFormValueOrEmpty('latitude'),
       longitude: getFormValueOrEmpty('longitude'),
@@ -122,8 +99,6 @@ export class CreatePlantsComponent implements OnInit {
       technologyProvider: getFormValueOrEmpty('technologyProvider'),
       rating: getFormValueOrEmpty('rating'),
       history: getFormValueOrEmpty('history'),
-      // renewableEnergyDataHistories: [], // Propiedad opcional vacía
-      // nameEnergy: "" // Propiedad opcional vacía
     };
 
     this.plantService.postCreatePlant(mockRenewableEnergyPlant).subscribe({
@@ -145,6 +120,28 @@ export class CreatePlantsComponent implements OnInit {
   }
 
   cleanFrom() {
-    this.plantaFormNew.reset();
+    this.plantForm .reset();
+  }
+
+  isValidFields(field: string): boolean | null {
+    return this.plantForm .controls[field].errors
+      && this.plantForm .controls[field].touched;
+  }
+
+  getFieldError(field: string): string {
+
+    if (!this.plantForm .controls[field]) return null;
+
+    const errors = this.plantForm .controls[field].errors || {};
+
+    for (const key of Object.keys(errors)) {
+      switch(key){
+        case 'required':
+          return 'Este campo es requerido';
+          case 'minlength':
+            return `´Minimo ${errors['minlength'].requiredLength } caracters.`;
+      }
+    }
+    return null;
   }
 }
