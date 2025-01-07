@@ -22,6 +22,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TableModule } from 'primeng/table';
 import {MatCardModule} from '@angular/material/card';
+import { PlantStatisticsComponent } from './components/dashboard/plant-statistics/plant-statistics.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatCardModule} from '@angular/material/card';
     CreatePlantsComponent,
     MapGeoComponent,
     InforPLantsComponent,
-    UppFilesPlantsComponent
+    UppFilesPlantsComponent,
+    PlantStatisticsComponent
   ],
   imports: [
     BrowserModule,

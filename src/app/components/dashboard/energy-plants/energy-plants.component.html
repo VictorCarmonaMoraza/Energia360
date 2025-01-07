@@ -18,7 +18,8 @@
               <td>{{ plant.country }}</td>
               <td>
                 <button (click)="selectPlant(plant)" class="btn btn-primary m-2">Ver detalles</button>
-                <button (click)="InfoPlant(plant.id)" class="btn btn-info">Informacion</button>
+                <button (click)="InfoPlant(plant.id)" class="btn btn-info m-2">Informacion</button>
+                <button (click)="PlantStatistics(plant.id)" class="btn btn-danger">Estadistica</button>
               </td>
             </tr>
           </tbody>

@@ -687,6 +687,14 @@ export class EnergyPlantsComponent implements OnInit {
     this.router.navigate(routePath);
   }
 
+  PlantStatistics(plantId: number){
+    console.log(plantId);
+    const routePath = ['/dashboard/statistics', plantId];
+    console.log('Navigating to:', routePath.join('/'));  // Imprime la ruta como una cadena
+    this.router.navigate(routePath);
+
+  }
+
 }
 
 

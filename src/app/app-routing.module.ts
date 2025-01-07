@@ -10,6 +10,7 @@ import { CreatePlantsComponent } from './components/dashboard/create-plants/crea
 import { InforPLantsComponent } from './components/dashboard/infor-plants/infor-plants.component';
 import { MapGeoComponent } from './components/dashboard/map-geo/map-geo.component';
 import { UppFilesPlantsComponent } from './components/dashboard/upp-files-plants/upp-files-plants.component';
+import { PlantStatisticsComponent } from './components/dashboard/plant-statistics/plant-statistics.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, children: [
       { path: '', component: EnergyPlantsComponent },
       { path: 'info/:id', component: InforPLantsComponent },
+      { path: 'statistics/:id', component: PlantStatisticsComponent },
       { path: 'mapGeoLoc', component: MapGeoComponent },
       { path: 'create', component: CreatePlantsComponent },
       { path: 'updatePlants', component: UppFilesPlantsComponent },
