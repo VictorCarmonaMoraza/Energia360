@@ -1,0 +1,31 @@
+/* Ajusta el tamaño del campo de entrada del formulario */
+.mat-form-field {
+  width: 100%; /* O cualquier otro tamaño */
+}
+
+/* Ajusta la altura y el tamaño de la fuente del input */
+.mat-input-element {
+  height: 40px; /* Altura del input */
+  font-size: 16px; /* Tamaño de la fuente */
+}
+
+/* Aumentar el tamaño del panel del datepicker */
+::ng-deep .mat-datepicker-popup {
+  width: 280px; /* Cambia el ancho del panel */
+}
+
+/* Ajustar el tamaño de los textos dentro del datepicker */
+::ng-deep .mat-calendar-body-cell-content {
+  font-size: 14px; /* Tamaño de fuente en el calendario */
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+#chart-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}

@@ -17,12 +17,16 @@ import { CreatePlantsComponent } from './components/dashboard/create-plants/crea
 import { MapGeoComponent } from './components/dashboard/map-geo/map-geo.component';
 import { InforPLantsComponent } from './components/dashboard/infor-plants/infor-plants.component';
 import { UppFilesPlantsComponent } from './components/dashboard/upp-files-plants/upp-files-plants.component';
+import { PlantStatisticsComponent } from './components/dashboard/plant-statistics/plant-statistics.component';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TableModule } from 'primeng/table';
 import {MatCardModule} from '@angular/material/card';
-import { PlantStatisticsComponent } from './components/dashboard/plant-statistics/plant-statistics.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -47,10 +51,15 @@ import { PlantStatisticsComponent } from './components/dashboard/plant-statistic
     HttpClientModule,
     MatGridListModule,
     TableModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideNativeDateAdapter()
   ],
   bootstrap: [AppComponent]
 })
